@@ -1,11 +1,11 @@
 spring:
   main:
-    web-application-type: none
+    web-application-type: servlet
     banner-mode: off
   ai:
     mcp:
       server:
-        stdio: true
+#        stdio: true
         name: pge-mcp
         version: 0.0.1
 logging:
