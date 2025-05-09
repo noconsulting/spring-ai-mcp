@@ -27,12 +27,18 @@ jobs:
       - name: Install dependencies
         run: mvn install
 
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+#      - name: Configure Docker to use Artifact Registry
+#        run: |
+#          gcloud auth configure-docker europe-west1-docker.pkg.dev
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: false
           tags: noc/spring-ai-mcp:latest
-
-      - name: Test CI
-        run : echo ${{ secrets.SECRET_TEST_1 }}
