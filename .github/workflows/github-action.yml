@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - test-ci
   pull_request:
     branches:
       - master
+      - test-ci
 
 jobs:
   build:
@@ -31,3 +33,6 @@ jobs:
           context: .
           push: false
           tags: noc/spring-ai-mcp:latest
+
+      - name: Test CI
+        run : echo ${{ secrets.SECRET_TEST_1 }}
