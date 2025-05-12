@@ -48,4 +48,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: https://registry.srv817320.hstgr.cloud/noc/spring-ai-mcp:latest
+          tags: registry.srv817320.hstgr.cloud/noc/spring-ai-mcp:latest
