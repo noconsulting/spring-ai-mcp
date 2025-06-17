@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - test-ci
   pull_request:
     branches:
       - master
+      - test-ci
 
 jobs:
   build:
@@ -25,9 +27,25 @@ jobs:
       - name: Install dependencies
         run: mvn install
 
+#      - name: Authentication to Google Cloud
+#        uses: google-github-actions/auth@v2
+#        with:
+#          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+#      - name: Configure Docker to use Artifact Registry
+#        run: |
+#          gcloud auth configure-docker europe-west1-docker.pkg.dev
+
+      - name: Login to Docker Registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://registry.srv817320.hstgr.cloud
+          username: ${{ secrets.DOCKER_REGISTRY_USR }}
+          password: ${{ secrets.DOCKER_REGISTRY_PWD }}
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: false
-          tags: noc/spring-ai-mcp:latest
+          push: true
+          tags: registry.srv817320.hstgr.cloud/noc/spring-ai-mcp:latest
